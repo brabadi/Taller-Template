@@ -1,0 +1,10 @@
+co\unicauca\restaurant\commons\infra\JsonError.class
+co\unicauca\restaurant\commons\domain\PlatoEjecutivo.class
+co\unicauca\restaurant\commons\domain\Component.class
+co\unicauca\restaurant\commons\domain\Customer.class
+co\unicauca\restaurant\commons\domain\ComponentType.class
+co\unicauca\restaurant\commons\infra\Utilities.class
+co\unicauca\restaurant\commons\domain\DiaEnum.class
+co\unicauca\restaurant\commons\domain\Restaurant.class
+co\unicauca\restaurant\commons\infra\Parameter.class
+co\unicauca\restaurant\commons\infra\Protocol.class
