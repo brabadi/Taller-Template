@@ -1,0 +1,6 @@
+co\unicauca\restaurant\server\access\RestaurantRepositoryMysql.class
+co\unicauca\restaurant\server\access\IRestaurantRepository.class
+co\unicauca\restaurant\server\infra\RestaurantServerSocket.class
+co\unicauca\restaurant\server\access\FactoryRepository.class
+co\unicauca\restaurant\server\app\AplicationRestaurant.class
+co\unicauca\restaurant\server\domain\server\RestaurantService.class
