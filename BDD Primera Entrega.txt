@@ -1,0 +1,108 @@
+--
+-- Base de datos: `restaurante Software-Food`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tabla `Cliente`
+--
+
+CREATE TABLE `cliente` (
+  `CLI_ID` int(11) AUTO_INCREMENT,
+  `CLI_NOMBRE` varchar(100) NOT NULL,
+  `CLI_DIRECCION` varchar(100) NOT NULL,
+  `CLI_CONTRASENIA` varchar(11) NOT NULL,
+  `CLI_TIPO` varchar(100) NOT NULL CHECK (`CLI_TIPO` IN ('ADMINISTRADOR','CLIENTE')),
+  `CLI_TELEFONO` varchar(12) NOT NULL,	  
+  CONSTRAINT PK_CLIENTE PRIMARY KEY (`CLI_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Tabla `restaurante`
+--
+
+CREATE TABLE `restaurante` (
+  `RES_NIT` int(11) AUTO_INCREMENT,
+  `CLI_ID` int(11),
+  `RES_NOMBRE` varchar(100) NOT NULL,
+  `RES_DIRECCION` varchar(100) NOT NULL,
+  CONSTRAINT PK_restaurante PRIMARY KEY (`RES_NIT`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Tabla `AlmuerzoEjecutivoDia`
+--
+
+CREATE TABLE `AlmuerzoEjeDia` (
+  `AlmEjeDia_ID` int(11) AUTO_INCREMENT,
+  `RES_NIT` int(11) NOT NULL,
+  `AlmEjeDia_DIASEM` varchar(10) NOT NULL CHECK (`AlmEjeDia_DIASEM` IN ('LUNES','MARTES','MIERCOLES','JUEVES','VIERNES','SABADO','DOMINGO')),
+  `AlmEjeDia_comp1` int(11) NOT NULL,
+  `AlmEjeDia_comp2` int(11) NOT NULL,
+  `AlmEjeDia_comp3` int(11) NOT NULL,
+  `AlmEjeDia_comp4` int(11) NOT NULL,
+  `AlmEjeDia_precio` int(11) NOT NULL,
+  CONSTRAINT PK_MENUDIA PRIMARY KEY (`AlmEjeDia_ID`)
+	
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+--
+-- Tabla `Componentes`
+--
+
+CREATE TABLE `Componentes` (
+`COMP_ID` int(11) AUTO_INCREMENT,
+`COMP_NOMBRE` varchar(100) NOT NULL,
+`COMP_TIPO` varchar(100) NOT NULL CHECK (`COMP_TIPO` IN ('ENTRADA','PRINCIPIO', 'PROTEINA','BEBIDA')),
+CONSTRAINT PK_Componentes PRIMARY KEY (`COMP_ID`)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `restaurante`
+  ADD CONSTRAINT `FK_CLIENTE_TIENE10_RES` FOREIGN KEY (`CLI_ID`) REFERENCES `cliente` (`CLI_ID`);
+
+--
+-- Filtros para la tabla `AlmuerzoEjeDia`
+--
+ALTER TABLE `AlmuerzoEjeDia`
+  ADD CONSTRAINT `FK_AlmuerzoEjeDia_TIENE_RESTAURANTE` FOREIGN KEY (`RES_NIT`) REFERENCES `restaurante` (`RES_NIT`);
+
+
+--
+-- insertar datos cliente
+--
+insert into cliente (CLI_ID,CLI_NOMBRE,CLI_DIRECCION,CLI_CONTRASENIA,CLI_TIPO,CLI_TELEFONO) values(12345670,'Braian Diaz','carrera 10 #50 norte 29','1234','ADMINISTRADOR','3137453366');
+
+insert into cliente (CLI_ID,CLI_NOMBRE,CLI_DIRECCION,CLI_CONTRASENIA,CLI_TIPO,CLI_TELEFONO) values(12345671,'Carolina Cruz','calle 1 # 10-29','1234','ADMINISTRADOR','3105678974');
+
+insert into cliente (CLI_ID,CLI_NOMBRE,CLI_DIRECCION,CLI_CONTRASENIA,CLI_TIPO,CLI_TELEFONO) values(12345672,'Jesus Barrera','calle 31 norte # 4-126','1234','CLIENTE','3158386646');
+--
+-- insertar datos restaurante
+--
+insert into restaurante (RES_NIT,CLI_ID,RES_NOMBRE,RES_DIRECCION) values(1000,12345670,'restaurante delicia','carrera 19');
+insert into restaurante (RES_NIT,CLI_ID,RES_NOMBRE,RES_DIRECCION) values(1001,12345671,'restaurante sabroso','calle 4');
+
+--
+-- insertar datos Tabla `Componentes`
+--
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (1,'sopa de verduras','ENTRADA');
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (2,'frijoles','PRINCIPIO');
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (3,'pollo_frito','PROTEINA');
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (4,'limonada','BEBIDA');
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (5,'sopa de carantanta','ENTRADA');
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (6,'lentejas','PRINCIPIO');
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (7,'pollo_sudado','PROTEINA');
+insert into Componentes (COMP_ID,COMP_NOMBRE,COMP_TIPO) values (8,'jugo de lulo','BEBIDA');
+--
+-- insertar datos AlmuerzoEjecutivoDia
+--
+insert into AlmuerzoEjeDia (AlmEjeDia_ID,RES_NIT,AlmEjeDia_DIASEM,AlmEjeDia_comp1,AlmEjeDia_comp2,AlmEjeDia_comp3,AlmEjeDia_comp4,AlmEjeDia_precio) values (101,1000,'LUNES',1,2,3,4,5000);
+
+insert into AlmuerzoEjeDia (AlmEjeDia_ID,RES_NIT,AlmEjeDia_DIASEM,AlmEjeDia_comp1,AlmEjeDia_comp2,AlmEjeDia_comp3,AlmEjeDia_comp4,AlmEjeDia_precio) values (102,1001,'MIERCOLES',5,6,7,8,8000);
+
